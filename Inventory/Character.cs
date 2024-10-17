@@ -4,14 +4,16 @@ public class Character
     public string Name;
     public float CarryCapacity;
     public float CurrentCarryWeight;
-    public bool CanPickUp = true;
 
-    public void CarryCheck()
+    public bool CanPickUp()
     {
-        if (CarryCapacity > CurrentCarryWeight)
+        if (CurrentCarryWeight > CarryCapacity)
         {
-            CanPickUp = false;
+            return false;
         }
-        else {CanPickUp = true;}
+        else
+        {
+            return true;
+        }
     }
 }

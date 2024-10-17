@@ -1,4 +1,4 @@
 public class Armour : Item
 {
-    float Protection;
+    public float Protection;
 }

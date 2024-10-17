@@ -12,3 +12,4 @@ c:\Users\leo.sundberg1\Documents\Programming 2\Inventory\Inventory\obj\Debug\net
 c:\Users\leo.sundberg1\Documents\Programming 2\Inventory\Inventory\obj\Debug\net8.0\Inventory.pdb
 c:\Users\leo.sundberg1\Documents\Programming 2\Inventory\Inventory\obj\Debug\net8.0\Inventory.genruntimeconfig.cache
 c:\Users\leo.sundberg1\Documents\Programming 2\Inventory\Inventory\obj\Debug\net8.0\ref\Inventory.dll
+c:\Users\leo.sundberg1\Documents\Programming 2\Inventory\Inventory\obj\Debug\net8.0\Inventory.sourcelink.json

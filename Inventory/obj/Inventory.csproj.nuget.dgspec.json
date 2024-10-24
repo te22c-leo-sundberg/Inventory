@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\Inventory.csproj": {}
+    "c:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\Inventory.csproj": {}
   },
   "projects": {
-    "C:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\Inventory.csproj": {
+    "c:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\Inventory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\Inventory.csproj",
+        "projectUniqueName": "c:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\Inventory.csproj",
         "projectName": "Inventory",
-        "projectPath": "C:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\Inventory.csproj",
+        "projectPath": "c:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\Inventory.csproj",
         "packagesPath": "C:\\Users\\leo.sundberg1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\obj\\",
+        "outputPath": "c:\\Users\\leo.sundberg1\\Documents\\Programming 2\\Inventory\\Inventory\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

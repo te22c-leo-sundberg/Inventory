@@ -28,7 +28,8 @@ if (input == "Y")
     else
     {
         Console.WriteLine("Your inventory is full!");
-    }
+    }    
+    i.Discard();
 }
 else if (input == "N")
 {

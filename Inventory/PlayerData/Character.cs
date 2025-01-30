@@ -1,9 +1,17 @@
 public class Character
 {
+    private string Name;
     public int Hp;
-    public string Name;
     public float CarryCapacity;
-    public float CurrentCarryWeight;
+    private float CurrentCarryWeight;
+
+    public Character(string name, int hp, float carryCap)
+    {
+        Name = name;
+        Hp = hp;
+        CarryCapacity = carryCap;
+        CurrentCarryWeight = 0;
+    }
 
     public bool CanPickUp()
     {

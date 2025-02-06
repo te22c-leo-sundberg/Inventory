@@ -1,0 +1,16 @@
+[
+    {
+        "MaxUses": 5,
+        "CurrentUses": 5,
+        "ConsumableStrength": 1,
+        "Name": "Healing Juice",
+        "Weight": 0.5
+    },
+    {
+        "MaxUses": 3,
+        "CurrentUses": 5,
+        "ConsumableStrength": 1.6,
+        "Name": "Redbull",
+        "Weight": 0.7
+    }
+]

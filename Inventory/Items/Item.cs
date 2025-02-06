@@ -1,5 +1,7 @@
+using System.Text.Json.Serialization;
+
 public class Item : Inventory
 {
-    public string Name;
-    public float Weight;
+    [JsonInclude] public string Name;
+    [JsonInclude] public float Weight;
 }

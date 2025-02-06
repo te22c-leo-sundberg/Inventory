@@ -1,0 +1,32 @@
+[
+    {
+        "Name": "Shoddy Sword",
+        "AttackSpeed": 1,
+        "MinDamage": 2,
+        "MaxDamage": 7
+    },
+    {
+        "Name": "Battleaxe",
+        "AttackSpeed": 0.9,
+        "MinDamage": 5,
+        "MaxDamage": 15
+    },
+    {
+        "Name": "Scythe",
+        "AttackSpeed": 1,
+        "MinDamage": 5,
+        "MaxDamage": 12
+    },
+    {
+        "Name": "¨Rapier",
+        "AttackSpeed": 1.2,
+        "MinDamage": 5,
+        "MaxDamage": 11
+    },
+    {
+        "Name": "Dagger",
+        "AttackSpeed": 1.6,
+        "MinDamage": 3,
+        "MaxDamage": 9
+    }
+]

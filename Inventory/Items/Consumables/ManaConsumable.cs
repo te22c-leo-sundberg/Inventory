@@ -1,16 +1,14 @@
-public class Consumable : Item
+public class ManaConsumable : Consumable
 {
-    public int MaxUses;
-    public int CurrentUses;
-    
-    public Consumable (string name, float weight, int maxUses)
+    public ManaConsumable (string name, float weight, int maxUses, float conStr)
     {
         Name = name;
         Weight = weight;
         MaxUses = maxUses;
         CurrentUses = maxUses;
+        ConsumableStrength = conStr;
     }
-    public void UseConsumable(Character target)
+    public void UseManaConsumable(Character target)
     {
         if (CurrentUses > 0)
         {

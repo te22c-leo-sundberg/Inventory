@@ -1,5 +1,6 @@
 public class HealthConsumable : Consumable
 {
+    public HealthConsumable () { }
     public HealthConsumable (string name, float weight, int maxUses, float conStr)
     {
         Name = name;

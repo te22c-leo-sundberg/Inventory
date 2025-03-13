@@ -1,0 +1,26 @@
+[
+    {
+        "Name": "Grouper",
+        "Hp": 150,
+        "MinDmg": 2,
+        "MaxDmg": 7
+    },
+    {
+        "Name": "Swarmer",
+        "Hp": 35,
+        "MinDmg": 6,
+        "MaxDmg": 12
+    },
+    {
+        "Name": "Crawler",
+        "Hp": 70,
+        "MinDmg": 5,
+        "MaxDmg": 16
+    },
+    {
+        "Name": "Slugger",
+        "Hp": 50,
+        "MinDmg": 10,
+        "MaxDmg": 20
+    }
+]

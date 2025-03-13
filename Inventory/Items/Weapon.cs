@@ -12,7 +12,10 @@ public class Weapon : Item
     {
         return Random.Shared.Next(MinDamage, MaxDamage);
     }
-    public Weapon (string name, float weight, float asp, int MinDmg, int MaxDmg)
+
+    public Weapon() { }
+
+    public Weapon(string name, float weight, float asp, int MinDmg, int MaxDmg)
     {
         Name = name;
         Weight = weight;

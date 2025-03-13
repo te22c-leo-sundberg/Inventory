@@ -1,5 +1,6 @@
 public class ManaConsumable : Consumable
 {
+    public ManaConsumable () { }
     public ManaConsumable (string name, float weight, int maxUses, float conStr)
     {
         Name = name;
@@ -12,7 +13,7 @@ public class ManaConsumable : Consumable
     {
         if (CurrentUses > 0)
         {
-            target.Hp += 10;
+            target.Mana += 10;
             CurrentUses --;
         }
     }

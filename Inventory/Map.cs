@@ -3,8 +3,9 @@ class Map
     int maxPaths = 15;
     int pathCount = 0;
     int roomTotal = 16;
-    public int[,] mapData = //Checka dictionaries
-    //  
+    public int startPosY;
+    public int startPosX;
+    public int[,] mapData =
     {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 2, 1, 2, 1, 2, 1, 2, 0 },
@@ -16,7 +17,7 @@ class Map
         { 0, 2, 1, 2, 1, 2, 1, 2, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     };
-    public void GenerateMap()
+    public void GenerateMap() //Generates a map using multiple different methods to make code feel less cluttered, and allowing changes to every method without looking at a bowl of spaghetti 
     {
         GeneratePaths(pathCount, maxPaths);
         CheckNeighbours(2, 3, 0);
@@ -24,12 +25,11 @@ class Map
         GenerateRooms();
         Console.Write(roomTotal);
     }
-
-    public void PrintMap(int playerY, int playerX)
+    public void PrintMap(int playerY, int playerX) //Prints the map using a different array based off the original map array. Also paints character where it is.
     {
         // string[] emojiMap = { "  ", "  ", " O", " +", "🈵", "🈳", "🈹", "🈯", "✴️", "⚜️" };
         // string[] emojiMap = { "  ", "  ", "🈵", "🈳", "➕", "🈹", "🈯", "✴️", "⚜️" };
-        string[] emojiMap = { "  ", " E", " O", " +", " ", " A", " D", " C", " T", " R" };
+        string[] emojiMap = { "  ", " E", " O", " +", " ", " ()", " []", " C", " T", " R" };
         string output;
         for (int y = 0; y < mapData.GetLength(0); y++)
         {
@@ -48,7 +48,7 @@ class Map
             Console.Write("\n");
         }
     }
-    void MovementCorrection(int playerX, int playerY)
+    void MovementCorrection(int playerX, int playerY) 
     {
         if (playerX > 7)
         {
@@ -76,7 +76,7 @@ class Map
         }
         return 0;
     }
-    public void MakePath(string direction, int playerX, int playerY)
+    public void MakePath(string direction, int playerX, int playerY) //Used to create a path in a direction to allow travel between closed paths.
     {
         if (mapData[playerY, playerX] == 2)
         {
@@ -139,7 +139,7 @@ class Map
         }
 
     }
-    void GeneratePaths(int pathCount, int maxPaths)
+    void GeneratePaths(int pathCount, int maxPaths) //Randomly generates paths for every 1 on the array, with a maximum of paths allowed. If a path is not generated, the 1 becomes a 0 
     {
         for (int y = 0; y < mapData.GetLength(0); y++) //
         {
@@ -167,7 +167,7 @@ class Map
             }
         }
     }
-    void CheckNeighbours(int checkData, int neighbourData, int newData)
+    void CheckNeighbours(int checkData, int neighbourData, int newData) //Checks the neighbours of a room square to see if it has any paths around it. If it does not, it makes itself 0
     {
         for (int y = 0; y < mapData.GetLength(0); y++)
         {
@@ -189,7 +189,7 @@ class Map
             }
         }
     }
-    void CheckNeighboursNumber(int checkData, int neighbourData, int newData, int countReq)
+    void CheckNeighboursNumber(int checkData, int neighbourData, int newData, int countReq) //Checks the neighbours of a path to see if it has more than 1 rooom next to it. If it does not, it makes itself 0
     {
         for (int y = 0; y < mapData.GetLength(0); y++)
         {
@@ -222,7 +222,7 @@ class Map
             }
         }
     }
-    void GenerateRooms()
+    void GenerateRooms() // Generates rooms for all squares with a 2, prioritizing making a ascend room (5), while also having a pity system to ensure that a descend room (6) is generated. For the rest, randomly chooses between 3 different room types.
     {
         int ladderRoomChance = roomTotal;
         bool hasEscape = false;
@@ -235,6 +235,8 @@ class Map
                 {
                     mapData[y, x] = 5;
                     hasEscape = true;
+                    startPosY = y;
+                    startPosX = x;
                     ladderRoomChance--;
                 }
                 if (mapData[y, x] == 2 && Random.Shared.Next(1, ladderRoomChance) == 1 && !hasLadder) // Creates a descend room

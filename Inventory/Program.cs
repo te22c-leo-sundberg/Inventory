@@ -14,7 +14,7 @@ string healthConsumableContents = File.ReadAllText("healthConsumables.json");
 string enemyContents = File.ReadAllText("healthConsumables.json");
 
 // Map m = new();
-List<Map> maps = new List<Map>();
+List<Map> maps = new List<Map>(); 
 
 List<Weapon> weapons = JsonSerializer.Deserialize<List<Weapon>>(weaponContents);
 List<Armour> armours = JsonSerializer.Deserialize<List<Armour>>(armourContents);
@@ -58,23 +58,6 @@ i.Items.Add(healthConsumables[1]);
 // time based combat where the player gets a different set amount of seconds where the enemies have a gap
 //in defese. this lets attack speed be relevant
 
-// while (playing)
-// {
-//     int choice = GetInt("What would you like to do? \n[1] Explore\n[2] Rest\n[3] Exit", 1, 3);
-//     if (choice == 1)
-//     {
-//         Console.WriteLine("You explored!");
-//     }
-//     else if (choice == 2)
-//     {
-//         Console.WriteLine("You rested!");
-//     }
-//     else
-//     {
-//         Console.WriteLine("You left!");
-//     }
-// }
-
 //Skapa ett sätt att genom att trycka Enter kunna generera flera maps
 //Skapa förflyttning för spelaren på kartan
 //Testa ifall MakePath() fungerar.
@@ -90,9 +73,11 @@ while (testing)
     string input = Console.ReadLine();
     if (input == "")
     {
-        Map m = new Map();
+        Map m = new Map(); // Maybe switch this to a dictionary.
         m.GenerateMap();
         maps.Add(m);
+        player.playerX = m.startPosX;
+        player.playerY = m.startPosY;
         m.PrintMap(player.playerY, player.playerX);
     }
     // Console.WriteLine(maps);

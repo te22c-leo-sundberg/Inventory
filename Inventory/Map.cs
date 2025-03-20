@@ -1,6 +1,10 @@
 class Map
 {
+    int maxPaths = 15;
+    int pathCount = 0;
+    int roomTotal = 16;
     public int[,] mapData = //Checka dictionaries
+    //  
     {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 2, 1, 2, 1, 2, 1, 2, 0 },
@@ -14,18 +18,18 @@ class Map
     };
     public void GenerateMap()
     {
-        int maxPaths = 15;
-        int pathCount = 0;
         GeneratePaths(pathCount, maxPaths);
         CheckNeighbours(2, 3, 0);
         CheckNeighboursNumber(3, 2, 0, 1);
+        GenerateRooms();
+        Console.Write(roomTotal);
     }
 
     public void PrintMap(int playerY, int playerX)
     {
-        // string[] emojiMap = { "  ", "  ", "🈵", "🈳", "↕️", "↔️", "➕", "🈹", "🈯", "✴️", "⚜️" };
+        // string[] emojiMap = { "  ", "  ", " O", " +", "🈵", "🈳", "🈹", "🈯", "✴️", "⚜️" };
         // string[] emojiMap = { "  ", "  ", "🈵", "🈳", "➕", "🈹", "🈯", "✴️", "⚜️" };
-        string[] emojiMap = { "  ", " E", " O", " +" };
+        string[] emojiMap = { "  ", " E", " O", " +", " ", " A", " D", " C", " T", " R" };
         string output;
         for (int y = 0; y < mapData.GetLength(0); y++)
         {
@@ -44,7 +48,6 @@ class Map
             Console.Write("\n");
         }
     }
-
     void MovementCorrection(int playerX, int playerY)
     {
         if (playerX > 7)
@@ -64,7 +67,6 @@ class Map
             playerY = 1;
         }
     }
-
     int CheckCollision(int playerX, int playerY)
     {
         if (mapData[playerY, playerX] != 1 && mapData[playerY, playerX] != 0)
@@ -74,7 +76,6 @@ class Map
         }
         return 0;
     }
-
     public void MakePath(string direction, int playerX, int playerY)
     {
         if (mapData[playerY, playerX] == 2)
@@ -138,9 +139,9 @@ class Map
         }
 
     }
-void GeneratePaths(int pathCount, int maxPaths)
-{
-    for (int y = 0; y < mapData.GetLength(0); y++) //
+    void GeneratePaths(int pathCount, int maxPaths)
+    {
+        for (int y = 0; y < mapData.GetLength(0); y++) //
         {
             for (int x = 0; x < mapData.GetLength(1); x++)
             {
@@ -165,7 +166,7 @@ void GeneratePaths(int pathCount, int maxPaths)
                 }
             }
         }
-}
+    }
     void CheckNeighbours(int checkData, int neighbourData, int newData)
     {
         for (int y = 0; y < mapData.GetLength(0); y++)
@@ -182,6 +183,7 @@ void GeneratePaths(int pathCount, int maxPaths)
                     )
                     {
                         mapData[y, x] = newData;
+                        roomTotal--;
                     }
                 }
             }
@@ -215,6 +217,48 @@ void GeneratePaths(int pathCount, int maxPaths)
                     if (count <= countReq)
                     {
                         mapData[y, x] = newData;
+                    }
+                }
+            }
+        }
+    }
+    void GenerateRooms()
+    {
+        int ladderRoomChance = roomTotal;
+        bool hasEscape = false;
+        bool hasLadder = false;
+        for (int y = 0; y < mapData.GetLength(0); y++)
+        {
+            for (int x = 0; x < mapData.GetLength(1); x++)
+            {
+                if (mapData[y, x] == 2 && !hasEscape) //Creats a ascend room
+                {
+                    mapData[y, x] = 5;
+                    hasEscape = true;
+                    ladderRoomChance--;
+                }
+                if (mapData[y, x] == 2 && Random.Shared.Next(1, ladderRoomChance) == 1 && !hasLadder) // Creates a descend room
+                {
+                    mapData[y, x] = 6;
+                    hasLadder = true;
+                }
+                else if (mapData[y, x] == 2)
+                {
+                    int roomChance = Random.Shared.Next(1, 4);
+                    if (roomChance == 1) // Creates a combat room
+                    {
+                        mapData[y, x] = 7;
+                        ladderRoomChance--;
+                    }
+                    else if (roomChance == 2) //Creates a treasure room
+                    {
+                        mapData[y, x] = 8;
+                        ladderRoomChance--;
+                    }
+                    else if (roomChance == 3) //Creates a rest room
+                    {
+                        mapData[y, x] = 9;
+                        ladderRoomChance--;
                     }
                 }
             }

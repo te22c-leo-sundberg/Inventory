@@ -4,7 +4,9 @@ class Enemy
     public int Hp;
     public int MinDmg;
     public int MaxDmg;
-    public Enemy () { }
+
+    public Enemy() { }
+
     public Enemy(string name, int hp, int minimumDmg, int maximumDmg)
     {
         Name = name;
@@ -12,5 +14,4 @@ class Enemy
         MinDmg = minimumDmg;
         MaxDmg = maximumDmg;
     }
-
 }

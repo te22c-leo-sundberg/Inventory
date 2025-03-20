@@ -5,6 +5,8 @@ public class Character
     public int Mana;
     public float CarryCapacity;
     private float CurrentCarryWeight;
+    public int playerX;
+    public int playerY;
 
     public Character(string name, int hp, int mana, float carryCap)
     {
@@ -17,7 +19,7 @@ public class Character
 
     public bool CanPickUp(float target)
     {
-        if (CurrentCarryWeight +  target > CarryCapacity)
+        if (CurrentCarryWeight + target > CarryCapacity)
         {
             return false;
         }

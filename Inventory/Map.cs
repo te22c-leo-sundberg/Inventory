@@ -29,7 +29,7 @@ class Map
     {
         // string[] emojiMap = { "  ", "  ", " O", " +", "🈵", "🈳", "🈹", "🈯", "✴️", "⚜️" };
         // string[] emojiMap = { "  ", "  ", "🈵", "🈳", "➕", "🈹", "🈯", "✴️", "⚜️" };
-        string[] emojiMap = { "  ", " E", " O", " +", " ", " ()", " []", " C", " T", " R" };
+        string[] emojiMap = { "  ", " E", " O", " +", "  ", "()", "[]", " C", " T", " R" };
         string output;
         for (int y = 0; y < mapData.GetLength(0); y++)
         {
@@ -48,7 +48,7 @@ class Map
             Console.Write("\n");
         }
     }
-    void MovementCorrection(int playerX, int playerY) 
+    void BorderCorrection(int playerX, int playerY) 
     {
         if (playerX > 7)
         {
@@ -67,14 +67,13 @@ class Map
             playerY = 1;
         }
     }
-    int CheckCollision(int playerX, int playerY)
+    int MovementCorrection(int playerX, int playerY)
     {
         if (mapData[playerY, playerX] != 1 && mapData[playerY, playerX] != 0)
         {
-            if (mapData[playerY, playerX] == 4)
-                return 1;
+            return 0;
         }
-        return 0;
+        return 1;
     }
     public void MakePath(string direction, int playerX, int playerY) //Used to create a path in a direction to allow travel between closed paths.
     {

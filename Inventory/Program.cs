@@ -14,7 +14,7 @@ string healthConsumableContents = File.ReadAllText("healthConsumables.json");
 string enemyContents = File.ReadAllText("healthConsumables.json");
 
 // Map m = new();
-List<Map> maps = new List<Map>(); 
+List<Map> maps = new List<Map>();
 
 List<Weapon> weapons = JsonSerializer.Deserialize<List<Weapon>>(weaponContents);
 List<Armour> armours = JsonSerializer.Deserialize<List<Armour>>(armourContents);
@@ -67,19 +67,24 @@ i.Items.Add(healthConsumables[1]);
 player.playerX = 1;
 player.playerY = 1;
 
+Map m = new Map(); // Maybe switch this to a dictionary.
+m.GenerateMap();
+maps.Add(m);
+player.playerX = m.startPosX;
+player.playerY = m.startPosY;
+
 bool testing = true;
+Movement();
+
 while (testing)
 {
-    string input = Console.ReadLine();
-    if (input == "")
-    {
-        Map m = new Map(); // Maybe switch this to a dictionary.
-        m.GenerateMap();
-        maps.Add(m);
-        player.playerX = m.startPosX;
-        player.playerY = m.startPosY;
-        m.PrintMap(player.playerY, player.playerX);
-    }
+    // string input = Console.ReadLine();
+    // if (input == "")
+    // {
+    Movement();
+
+    m.PrintMap(player.playerY, player.playerX);
+    // }
     // Console.WriteLine(maps);
 }
 
@@ -108,4 +113,36 @@ int GetInt(string text, int minNum, int maxNum)
         }
     }
     return output;
+}
+
+void Movement()
+{
+    bool success = false;
+    while (!success)
+    {
+        if (Console.ReadKey().Key == ConsoleKey.DownArrow)
+        {
+            Console.WriteLine("Down");
+            player.playerY += 1;
+            success = true;
+        }
+        else if (Console.ReadKey().Key == ConsoleKey.UpArrow)
+        {
+            Console.WriteLine("Up");
+            player.playerY += -1;
+            success = true;
+        }
+        else if (Console.ReadKey().Key == ConsoleKey.RightArrow)
+        {
+            Console.WriteLine("Right");
+            player.playerX += -1;
+            success = true;
+        }
+        else if (Console.ReadKey().Key == ConsoleKey.LeftArrow)
+        {
+            Console.WriteLine("Left");
+            player.playerX += -1;
+            success = true;
+        }
+    }
 }

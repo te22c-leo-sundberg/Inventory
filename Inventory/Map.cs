@@ -49,7 +49,7 @@ class Map
             Console.Write("\n");
         }
     }
-    void BorderCorrection(int playerX, int playerY) 
+    void BorderCorrection(int playerX, int playerY)
     {
         if (playerX > 7)
         {
@@ -81,15 +81,16 @@ class Map
     }
     public void MakePath(string direction, int playerX, int playerY) //Used to create a path in a direction to allow travel between closed paths.
     {
-        if (mapData[playerY, playerX] == 2)
+        if (digCount > 0)
         {
-            if (direction == "left")
+            if (direction == "Left")
             {
-                if (playerX != 1)
+                if (playerX >= 1)
                 {
                     if (mapData[playerY, playerX - 1] != 3 && mapData[playerY, playerX - 2] > 3)
                     {
                         mapData[playerY, playerX - 1] = 3;
+                        digCount --;
                     }
                     else
                     {
@@ -97,13 +98,14 @@ class Map
                     }
                 }
             }
-            else if (direction == "right")
+            else if (direction == "Right")
             {
-                if (playerX != 7)
+                if (playerX <= 7)
                 {
                     if (mapData[playerY, playerX + 1] != 3 && mapData[playerY, playerX + 2] > 3)
                     {
                         mapData[playerY, playerX + 1] = 3;
+                        digCount --;
                     }
                     else
                     {
@@ -111,13 +113,14 @@ class Map
                     }
                 }
             }
-            else if (direction == "up")
+            else if (direction == "Up")
             {
-                if (playerY != 1)
+                if (playerY >= 1)
                 {
                     if (mapData[playerY - 1, playerX] != 3 && mapData[playerY - 2, playerX] > 3)
                     {
                         mapData[playerY - 1, playerX] = 3;
+                        digCount --;
                     }
                     else
                     {
@@ -125,13 +128,14 @@ class Map
                     }
                 }
             }
-            else if (direction == "down")
+            else if (direction == "Down")
             {
-                if (playerX != 7)
+                if (playerX <= 7)
                 {
                     if (mapData[playerY + 1, playerX] != 3 && mapData[playerY + 2, playerX] > 3)
                     {
                         mapData[playerY + 1, playerX] = 3;
+                        digCount --;
                     }
                     else
                     {

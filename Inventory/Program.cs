@@ -76,12 +76,26 @@ bool testing = true;
 
 while (testing)
 {
-    // string input = Console.ReadLine();
-    // if (input == "")
-    // {
-    Movement();
+    // Console.Clear();
+
+    int input = GetInt("Do you wish to Move [1], Dig [2] or Get Information [3]", 1, 3);
+    if (input == 1)
+    {
+        Movement();
+    }
+    else if (input == 2)
+    {
+        m.MakePath(GetDirection(), player.playerX, player.playerY);
+    }
+    else if (input == 3)
+    {
+        Console.WriteLine("Haha");
+    }
+
 
     m.PrintMap(player.playerY, player.playerX);
+    Console.WriteLine("Move using the arrow keys, if you require any additional information, press [H]");
+
     // }
     // Console.WriteLine(maps);
 }
@@ -112,34 +126,55 @@ int GetInt(string text, int minNum, int maxNum)
     }
     return output;
 }
-
+string GetDirection()
+{
+    bool success = false;
+    while (!success)
+    {
+        ConsoleKey key = Console.ReadKey().Key;
+        if (key == ConsoleKey.DownArrow)
+        {
+            success = true;
+            return "Down";
+        }
+        else if (key == ConsoleKey.UpArrow)
+        {
+            success = true;
+            return "Up";
+        }
+        else if (key == ConsoleKey.LeftArrow)
+        {
+            success = true;
+            return "Left";
+        }
+        else if (key == ConsoleKey.RightArrow)
+        {
+            success = true;
+            return "Right";
+        }
+    }
+    return "";
+}
 void Movement()
 {
     bool success = false;
     while (!success)
     {
-        if (Console.ReadKey().Key == ConsoleKey.DownArrow)
+        ConsoleKey key = Console.ReadKey().Key;
+        if (key == ConsoleKey.DownArrow)
         {
-            // player.playerY ++;
-            // success = true;
             MoveDirection(0, 1, "Down"); //Moves the character down once on the map.
         }
-        else if (Console.ReadKey().Key == ConsoleKey.UpArrow)
+        else if (key == ConsoleKey.UpArrow)
         {
-            // player.playerY --;
-            // success = true;
             MoveDirection(0, -1, "Up"); //Moves the character up once on the map.
         }
-        else if (Console.ReadKey().Key == ConsoleKey.RightArrow)
+        else if (key == ConsoleKey.RightArrow)
         {
-            // player.playerX ++;
-            // success = true;
             MoveDirection(1, 0, "Right"); //Moves the character right once on the map.
         }
-        else if (Console.ReadKey().Key == ConsoleKey.LeftArrow)
+        else if (key == ConsoleKey.LeftArrow)
         {
-            // player.playerX --;
-            // success = true;
             MoveDirection(-1, 0, "Left"); //Moves the character left once on the map.
         }
     }
@@ -147,7 +182,7 @@ void Movement()
     {
         if (m.MovementCorrection(player.playerX, player.playerY, moveX, moveY))
         {
-            Console.WriteLine(direction);
+            // Console.WriteLine(direction);
             player.playerX += moveX;
             player.playerY += moveY;
             success = true;

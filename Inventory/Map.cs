@@ -3,6 +3,7 @@ class Map
     int maxPaths = 15;
     int pathCount = 0;
     int roomTotal = 16;
+    int digCount = 2;
     public int startPosY;
     public int startPosX;
     public int[,] mapData =
@@ -86,7 +87,7 @@ class Map
             {
                 if (playerX != 1)
                 {
-                    if (mapData[playerY, playerX - 2] != 0 && mapData[playerY, playerX - 2] > 3)
+                    if (mapData[playerY, playerX - 1] != 3 && mapData[playerY, playerX - 2] > 3)
                     {
                         mapData[playerY, playerX - 1] = 3;
                     }
@@ -100,7 +101,7 @@ class Map
             {
                 if (playerX != 7)
                 {
-                    if (mapData[playerY, playerX + 2] != 0 && mapData[playerY, playerX + 2] > 3)
+                    if (mapData[playerY, playerX + 1] != 3 && mapData[playerY, playerX + 2] > 3)
                     {
                         mapData[playerY, playerX + 1] = 3;
                     }
@@ -114,7 +115,7 @@ class Map
             {
                 if (playerY != 1)
                 {
-                    if (mapData[playerY - 2, playerX] != 0 && mapData[playerY - 2, playerX] > 3)
+                    if (mapData[playerY - 1, playerX] != 3 && mapData[playerY - 2, playerX] > 3)
                     {
                         mapData[playerY - 1, playerX] = 3;
                     }
@@ -128,7 +129,7 @@ class Map
             {
                 if (playerX != 7)
                 {
-                    if (mapData[playerY + 2, playerX] != 0 && mapData[playerY + 2, playerX] > 3)
+                    if (mapData[playerY + 1, playerX] != 3 && mapData[playerY + 2, playerX] > 3)
                     {
                         mapData[playerY + 1, playerX] = 3;
                     }

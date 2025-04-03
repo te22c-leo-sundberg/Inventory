@@ -67,13 +67,16 @@ class Map
             playerY = 1;
         }
     }
-    int MovementCorrection(int playerX, int playerY)
+    public bool MovementCorrection(int playerX, int playerY, int movementX, int movementY)
     {
-        if (mapData[playerY, playerX] != 1 && mapData[playerY, playerX] != 0)
+        if (mapData[playerY + movementY, playerX + movementX] != 0)
         {
-            return 0;
+            return true;
         }
-        return 1;
+        else
+        {
+            return false;
+        }
     }
     public void MakePath(string direction, int playerX, int playerY) //Used to create a path in a direction to allow travel between closed paths.
     {

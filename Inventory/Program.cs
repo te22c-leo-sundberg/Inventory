@@ -64,17 +64,15 @@ i.Items.Add(healthConsumables[1]);
 //Gör så att rummen blir till olika versioner som Enemy rum, Treasure rum etc.
 //Test movement correction
 //
-player.playerX = 1;
-player.playerY = 1;
-
 Map m = new Map(); // Maybe switch this to a dictionary.
 m.GenerateMap();
 maps.Add(m);
 player.playerX = m.startPosX;
 player.playerY = m.startPosY;
+m.PrintMap(player.playerY, player.playerX);
 
 bool testing = true;
-Movement();
+// Movement();
 
 while (testing)
 {
@@ -122,26 +120,36 @@ void Movement()
     {
         if (Console.ReadKey().Key == ConsoleKey.DownArrow)
         {
-            Console.WriteLine("Down");
-            player.playerY += 1;
-            success = true;
+            // player.playerY ++;
+            // success = true;
+            MoveDirection(0, 1, "Down"); //Moves the character down once on the map.
         }
         else if (Console.ReadKey().Key == ConsoleKey.UpArrow)
         {
-            Console.WriteLine("Up");
-            player.playerY += -1;
-            success = true;
+            // player.playerY --;
+            // success = true;
+            MoveDirection(0, -1, "Up"); //Moves the character up once on the map.
         }
         else if (Console.ReadKey().Key == ConsoleKey.RightArrow)
         {
-            Console.WriteLine("Right");
-            player.playerX += -1;
-            success = true;
+            // player.playerX ++;
+            // success = true;
+            MoveDirection(1, 0, "Right"); //Moves the character right once on the map.
         }
         else if (Console.ReadKey().Key == ConsoleKey.LeftArrow)
         {
-            Console.WriteLine("Left");
-            player.playerX += -1;
+            // player.playerX --;
+            // success = true;
+            MoveDirection(-1, 0, "Left"); //Moves the character left once on the map.
+        }
+    }
+    void MoveDirection(int moveX, int moveY, string direction)
+    {
+        if (m.MovementCorrection(player.playerX, player.playerY, moveX, moveY))
+        {
+            Console.WriteLine(direction);
+            player.playerX += moveX;
+            player.playerY += moveY;
             success = true;
         }
     }

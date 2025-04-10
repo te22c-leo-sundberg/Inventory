@@ -273,4 +273,15 @@ class Map
             }
         }
     }
+    void Ascend(int currentMap)
+    {
+        if (currentMap > 0)
+        {
+            currentMap--;
+        }
+    }
+    void Descend(int currentMap)
+    {
+        currentMap++;
+    }
 }

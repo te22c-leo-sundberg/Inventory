@@ -27,6 +27,7 @@ string scene = "";
 bool battle = false;
 bool treasure = false;
 bool rest = false;
+int currentFloor = 0;
 
 Character player = new("John", 15, 25, 4.5f);
 Inventory i = new();

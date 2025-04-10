@@ -68,40 +68,66 @@ i.Items.Add(healthConsumables[1]);
 Map m = new Map(); // Maybe switch this to a dictionary.
 m.GenerateMap();
 maps.Add(m);
-player.playerX = m.startPosX;
-player.playerY = m.startPosY;
+player.playerX = maps[currentFloor].startPosX;
+player.playerY = maps[currentFloor].startPosY;
 m.PrintMap(player.playerY, player.playerX);
 
 bool testing = true;
 // Movement();
 
-while (testing)
-{
-    // Console.Clear();
+// while (testing)
+// {
+//     // Console.Clear();
 
-    int input = GetInt("Do you wish to Move [1], Dig [2] or Get Information [3]", 1, 3);
-    if (input == 1)
+//     int input = GetInt("Do you wish to Move [1], Dig [2] or Get Information [3]", 1, 3);
+//     if (input == 1)
+//     {
+//         Movement();
+//     }
+//     else if (input == 2)
+//     {
+//         m.MakePath(GetDirection(), player.playerX, player.playerY);
+//     }
+//     else if (input == 3)
+//     {
+//         Console.WriteLine("Haha");
+//     }
+
+
+//     maps[currentFloor].PrintMap(player.playerY, player.playerX);
+//     Console.WriteLine("Move using the arrow keys, if you require any additional information, press [H]");
+
+//     // }
+//     // Console.WriteLine(maps);
+// }
+
+// m.MakePath("right", player.playerX, player.playerY);
+
+while(testing)
+{
+    Console.Clear();
+
+    int input = GetInt("Do you wish to Do Nothing [0], Move [1], Dig [2] or Get Information [3]", 0, 3);
+    if (input == 0)
+    {
+    }
+    else if (input == 1)
     {
         Movement();
     }
     else if (input == 2)
     {
-        m.MakePath(GetDirection(), player.playerX, player.playerY);
+        maps[currentFloor].MakePath(GetDirection(), player.playerX, player.playerY);
     }
     else if (input == 3)
     {
         Console.WriteLine("Haha");
     }
 
+    maps[currentFloor].PrintMap(player.playerY, player.playerX);
 
-    m.PrintMap(player.playerY, player.playerX);
     Console.WriteLine("Move using the arrow keys, if you require any additional information, press [H]");
-
-    // }
-    // Console.WriteLine(maps);
 }
-
-// m.MakePath("right", player.playerX, player.playerY);
 
 Console.ReadLine();
 
@@ -165,23 +191,27 @@ void Movement()
         if (key == ConsoleKey.DownArrow)
         {
             MoveDirection(0, 1, "Down"); //Moves the character down once on the map.
+            maps[currentFloor].CheckCollision(player.playerX, player.playerY, currentFloor);
         }
         else if (key == ConsoleKey.UpArrow)
         {
             MoveDirection(0, -1, "Up"); //Moves the character up once on the map.
+            maps[currentFloor].CheckCollision(player.playerX, player.playerY, currentFloor);
         }
         else if (key == ConsoleKey.RightArrow)
         {
             MoveDirection(1, 0, "Right"); //Moves the character right once on the map.
+            maps[currentFloor].CheckCollision(player.playerX, player.playerY, currentFloor);
         }
         else if (key == ConsoleKey.LeftArrow)
         {
             MoveDirection(-1, 0, "Left"); //Moves the character left once on the map.
+            maps[currentFloor].CheckCollision(player.playerX, player.playerY, currentFloor);
         }
     }
     void MoveDirection(int moveX, int moveY, string direction)
     {
-        if (m.MovementCorrection(player.playerX, player.playerY, moveX, moveY))
+        if (maps[currentFloor].MovementCorrection(player.playerX, player.playerY, moveX, moveY))
         {
             // Console.WriteLine(direction);
             player.playerX += moveX;

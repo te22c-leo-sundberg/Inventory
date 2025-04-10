@@ -6,6 +6,8 @@ class Map
     int digCount = 2;
     public int startPosY;
     public int startPosX;
+    public int storedPosY;
+    public int storedPosX;
     public int[,] mapData =
     {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -90,7 +92,7 @@ class Map
                     if (mapData[playerY, playerX - 1] != 3 && mapData[playerY, playerX - 2] > 3)
                     {
                         mapData[playerY, playerX - 1] = 3;
-                        digCount --;
+                        digCount--;
                     }
                     else
                     {
@@ -105,7 +107,7 @@ class Map
                     if (mapData[playerY, playerX + 1] != 3 && mapData[playerY, playerX + 2] > 3)
                     {
                         mapData[playerY, playerX + 1] = 3;
-                        digCount --;
+                        digCount--;
                     }
                     else
                     {
@@ -120,7 +122,7 @@ class Map
                     if (mapData[playerY - 1, playerX] != 3 && mapData[playerY - 2, playerX] > 3)
                     {
                         mapData[playerY - 1, playerX] = 3;
-                        digCount --;
+                        digCount--;
                     }
                     else
                     {
@@ -135,7 +137,7 @@ class Map
                     if (mapData[playerY + 1, playerX] != 3 && mapData[playerY + 2, playerX] > 3)
                     {
                         mapData[playerY + 1, playerX] = 3;
-                        digCount --;
+                        digCount--;
                     }
                     else
                     {
@@ -258,6 +260,7 @@ class Map
                     {
                         mapData[y, x] = 7;
                         ladderRoomChance--;
+
                     }
                     else if (roomChance == 2) //Creates a treasure room
                     {
@@ -273,15 +276,49 @@ class Map
             }
         }
     }
-    void Ascend(int currentMap)
+    public void CheckCollision(int playerX, int playerY, int currentMap)
     {
-        if (currentMap > 0)
+        if (mapData[playerY, playerX] == 5) // Ascend
         {
-            currentMap--;
+            if (currentMap > 0)
+            {
+                storedPosX = playerX;
+                storedPosY = playerY;
+                currentMap--;
+            }
+        }
+        else if (mapData[playerY, playerX] == 6) // Descend
+        {
+            if (currentMap > 0)
+            {
+                storedPosX = playerX;
+                storedPosY = playerY;
+                currentMap++;
+            }
+        }
+        else if (mapData[playerY, playerX] == 7) // Combat
+        {
+
+        }
+        else if (mapData[playerY, playerX] == 8) // Treasure
+        {
+
+        }
+        else if (mapData[playerY, playerX] == 9) // Rest
+        {
+
         }
     }
-    void Descend(int currentMap)
+    void Combat()
     {
-        currentMap++;
+
+    }
+    void Treasure()
+    {
+
+    }
+    void Rest()
+    {
+
     }
 }

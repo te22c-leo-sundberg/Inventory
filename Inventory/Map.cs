@@ -8,7 +8,7 @@ class Map
     public int startPosX;
     public int storedPosY;
     public int storedPosX;
-    public int[,] mapData =
+    public int[,] mapData = //Creates an array of digits between 0 to 2. 0's represent borders, 1 represents possible paths and 2 represents possible rooms.
     {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 2, 1, 2, 1, 2, 1, 2, 0 },
@@ -20,11 +20,11 @@ class Map
         { 0, 2, 1, 2, 1, 2, 1, 2, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     };
-    public void GenerateMap() //Generates a map using multiple different methods to make code feel less cluttered, and allowing changes to every method without looking at a bowl of spaghetti 
+    public void GenerateMap() //Generates a map using multiple methods.
     {
-        GeneratePaths(pathCount, maxPaths);
-        CheckNeighbours(2, 3, 0);
-        CheckNeighboursNumber(3, 2, 0, 1);
+        GeneratePaths(pathCount, maxPaths); //Runs a chance of 5 over 9 for each 1, seeing if they become a path. Restricts paths to a maximum of 15. If a 1 becomes a path, it changes to 3 on the array.
+        CheckNeighbours(2, 3, 0); //Checks in a plus around the room (2 on the array), if there are no paths next to the room, the room is deleted and 
+        CheckNeighboursNumber(3, 2, 0, 1); 
         GenerateRooms();
         Console.Write(roomTotal);
     }
@@ -51,28 +51,28 @@ class Map
             Console.Write("\n");
         }
     }
-    void BorderCorrection(int playerX, int playerY)
+    // void BorderCorrection(int playerX, int playerY)
+    // {
+    //     if (playerX > 7)
+    //     {
+    //         playerX = 7;
+    //     }
+    //     else if (playerX < 1)
+    //     {
+    //         playerX = 1;
+    //     }
+    //     if (playerY > 7)
+    //     {
+    //         playerY = 7;
+    //     }
+    //     else if (playerY < 1)
+    //     {
+    //         playerY = 1;
+    //     }
+    // }
+    public bool IsOnPath(int playerX, int playerY, int movementX, int movementY)
     {
-        if (playerX > 7)
-        {
-            playerX = 7;
-        }
-        else if (playerX < 1)
-        {
-            playerX = 1;
-        }
-        if (playerY > 7)
-        {
-            playerY = 7;
-        }
-        else if (playerY < 1)
-        {
-            playerY = 1;
-        }
-    }
-    public bool MovementCorrection(int playerX, int playerY, int movementX, int movementY)
-    {
-        if (mapData[playerY + movementY, playerX + movementX] != 0)
+        if (mapData[playerY + movementY, playerX + movementX] >= 3)
         {
             return true;
         }
@@ -276,39 +276,8 @@ class Map
             }
         }
     }
-    public void CheckCollision(int playerX, int playerY, int currentMap)
-    {
-        if (mapData[playerY, playerX] == 5) // Ascend
-        {
-            if (currentMap > 0)
-            {
-                storedPosX = playerX;
-                storedPosY = playerY;
-                currentMap--;
-            }
-        }
-        else if (mapData[playerY, playerX] == 6) // Descend
-        {
-            if (currentMap > 0)
-            {
-                storedPosX = playerX;
-                storedPosY = playerY;
-                currentMap++;
-            }
-        }
-        else if (mapData[playerY, playerX] == 7) // Combat
-        {
 
-        }
-        else if (mapData[playerY, playerX] == 8) // Treasure
-        {
-
-        }
-        else if (mapData[playerY, playerX] == 9) // Rest
-        {
-
-        }
-    }
+    
     void Combat()
     {
 

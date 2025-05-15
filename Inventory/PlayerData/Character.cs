@@ -5,8 +5,6 @@ public class Character
     public int Mana;
     public float CarryCapacity;
     private float CurrentCarryWeight;
-    public int playerX;
-    public int playerY;
 
     public Character(string name, int hp, int mana, float carryCap)
     {

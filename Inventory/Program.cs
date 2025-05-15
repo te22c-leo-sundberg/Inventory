@@ -14,7 +14,6 @@ string healthConsumableContents = File.ReadAllText("healthConsumables.json");
 string enemyContents = File.ReadAllText("healthConsumables.json");
 
 // Map m = new();
-List<Map> maps = new List<Map>();
 
 List<Weapon> weapons = JsonSerializer.Deserialize<List<Weapon>>(weaponContents);
 List<Armour> armours = JsonSerializer.Deserialize<List<Armour>>(armourContents);
@@ -27,8 +26,7 @@ string scene = "";
 bool battle = false;
 bool treasure = false;
 bool rest = false;
-int currentFloor = 0;
-
+MapMover m = new();
 Character player = new("John", 15, 25, 4.5f);
 Inventory i = new();
 Armour helmet = new("Spikey Hat", 2.5f, 0.7f, 0.2f, 2);
@@ -42,18 +40,13 @@ bool start = true;
 while (testing)
 {
     Console.Clear();
-    if (start)
+    if (start) //Move this to MapMover.cs
     {
-        Map map = new Map();
-        currentFloor = 0;
-        map.GenerateMap();
-        maps.Add(map);
-        player.playerX = maps[currentFloor].startPosX;
-        player.playerY = maps[currentFloor].startPosY;
+        m.StartGame();
         start = false;
     }
 
-    maps[currentFloor].PrintMap(player.playerY, player.playerX);
+    m.maps[m.GetCurrentFloor()].PrintMap(m.GetPlayerY(), m.GetPlayerX());
     
     int input = GetInt("Do you wish to Do Nothing [0], Move [1], Dig [2] or Descend [3]", 0, 3);
     if (input == 0)
@@ -61,15 +54,15 @@ while (testing)
     }
     else if (input == 1)
     {
-        Movement();
+        m.Movement();
     }
     else if (input == 2)
     {
-        maps[currentFloor].MakePath(GetDirection(), player.playerX, player.playerY);
+        m.maps[m.GetCurrentFloor()].MakePath(m.GetDirection(), m.GetPlayerX(), m.GetPlayerY());
     }
     else if (input == 3)
     {
-        Descend();
+        m.Descend();
     }
 
     Console.WriteLine("Move using the arrow keys, if you require any additional information, press [H]");
@@ -99,79 +92,3 @@ int GetInt(string text, int minNum, int maxNum)
     }
     return output;
 }
-string GetDirection()
-{
-    bool success = false;
-    while (!success)
-    {
-        ConsoleKey key = Console.ReadKey().Key;
-        if (key == ConsoleKey.DownArrow)
-        {
-            success = true;
-            return "Down";
-        }
-        else if (key == ConsoleKey.UpArrow)
-        {
-            success = true;
-            return "Up";
-        }
-        else if (key == ConsoleKey.LeftArrow)
-        {
-            success = true;
-            return "Left";
-        }
-        else if (key == ConsoleKey.RightArrow)
-        {
-            success = true;
-            return "Right";
-        }
-    }
-    return "";
-}
-void Movement()
-{
-    bool success = false;
-    while (!success)
-    {
-        ConsoleKey key = Console.ReadKey().Key;
-        if (key == ConsoleKey.DownArrow)
-        {
-            MoveDirection(0, 1, "Down"); //Moves the character down once on the map.
-            maps[currentFloor].CheckCollision(player.playerX, player.playerY, currentFloor);
-        }
-        else if (key == ConsoleKey.UpArrow)
-        {
-            MoveDirection(0, -1, "Up"); //Moves the character up once on the map.
-            maps[currentFloor].CheckCollision(player.playerX, player.playerY, currentFloor);
-        }
-        else if (key == ConsoleKey.RightArrow)
-        {
-            MoveDirection(1, 0, "Right"); //Moves the character right once on the map.
-            maps[currentFloor].CheckCollision(player.playerX, player.playerY, currentFloor);
-        }
-        else if (key == ConsoleKey.LeftArrow)
-        {
-            MoveDirection(-1, 0, "Left"); //Moves the character left once on the map.
-            maps[currentFloor].CheckCollision(player.playerX, player.playerY, currentFloor);
-        }
-    }
-    void MoveDirection(int moveX, int moveY, string direction)
-    {
-        if (maps[currentFloor].MovementCorrection(player.playerX, player.playerY, moveX, moveY))
-        {
-            // Console.WriteLine(direction);
-            player.playerX += moveX;
-            player.playerY += moveY;
-            success = true;
-        }
-    }
-}
-void Descend()
-    {
-        Map map = new Map();
-        currentFloor++;
-        map.GenerateMap();
-        maps.Add(map);
-        player.playerX = maps[currentFloor].startPosX;
-        player.playerY = maps[currentFloor].startPosY;
-    }

@@ -4,10 +4,8 @@ class Map
     int pathCount = 0;
     int roomTotal = 16;
     int digCount = 2;
-    public int startPosY;
-    public int startPosX;
-    public int storedPosY;
-    public int storedPosX;
+    public int posY;
+    public int posX;
     public int[,] mapData = //Creates an array of digits between 0 to 2. 0's represent borders, 1 represents possible paths and 2 represents possible rooms.
     {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -24,7 +22,7 @@ class Map
     {
         GeneratePaths(pathCount, maxPaths); //Runs a chance of 5 over 9 for each 1, seeing if they become a path. Restricts paths to a maximum of 15. If a 1 becomes a path, it changes to 3 on the array.
         CheckNeighbours(2, 3, 0); //Checks in a plus around the room (2 on the array), if there are no paths next to the room, the room is deleted and 
-        CheckNeighboursNumber(3, 2, 0, 1); 
+        CheckNeighboursNumber(3, 2, 0, 1);
         GenerateRooms();
         Console.Write(roomTotal);
     }
@@ -51,25 +49,40 @@ class Map
             Console.Write("\n");
         }
     }
-    // void BorderCorrection(int playerX, int playerY)
-    // {
-    //     if (playerX > 7)
-    //     {
-    //         playerX = 7;
-    //     }
-    //     else if (playerX < 1)
-    //     {
-    //         playerX = 1;
-    //     }
-    //     if (playerY > 7)
-    //     {
-    //         playerY = 7;
-    //     }
-    //     else if (playerY < 1)
-    //     {
-    //         playerY = 1;
-    //     }
-    // }
+    public string PlayerPos(int playerX, int playerY)
+    {
+        int roomData = mapData[playerY, playerX];
+        if (roomData == 3)
+        {
+            Console.WriteLine("You are on a path, what way will you choose to walk?");
+            return "Path";
+        }
+        else if (roomData == 5)
+        {
+            Console.WriteLine("Would you like to move up a floor?");
+            return "Ascend";
+        }
+        else if (roomData == 6)
+        {
+
+            return "Descend";
+        }
+        else if (roomData == 7)
+        {
+            return "Combat";
+
+        }
+        else if (roomData == 8)
+        {
+
+            return "Treasure";
+        }
+        else
+        {
+
+            return "Rest";
+        }
+    }
     public bool IsOnPath(int playerX, int playerY, int movementX, int movementY)
     {
         if (mapData[playerY + movementY, playerX + movementX] >= 3)
@@ -244,8 +257,8 @@ class Map
                 {
                     mapData[y, x] = 5;
                     hasEscape = true;
-                    startPosY = y;
-                    startPosX = x;
+                    posY = y;
+                    posX = x;
                     ladderRoomChance--;
                 }
                 if (mapData[y, x] == 2 && Random.Shared.Next(1, ladderRoomChance) == 1 && !hasLadder) // Creates a descend room
@@ -277,7 +290,7 @@ class Map
         }
     }
 
-    
+
     void Combat()
     {
 

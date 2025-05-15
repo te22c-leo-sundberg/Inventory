@@ -39,56 +39,8 @@ bool start = true;
 
 while (testing)
 {
-    Console.Clear();
-    if (start) //Move this to MapMover.cs
-    {
-        m.StartGame();
-        start = false;
-    }
-
-    m.maps[m.GetCurrentFloor()].PrintMap(m.GetPlayerY(), m.GetPlayerX());
-    
-    int input = GetInt("Do you wish to Do Nothing [0], Move [1], Dig [2] or Descend [3]", 0, 3);
-    if (input == 0)
-    {
-    }
-    else if (input == 1)
-    {
-        m.Movement();
-    }
-    else if (input == 2)
-    {
-        m.maps[m.GetCurrentFloor()].MakePath(m.GetDirection(), m.GetPlayerX(), m.GetPlayerY());
-    }
-    else if (input == 3)
-    {
-        m.Descend();
-    }
-
-    Console.WriteLine("Move using the arrow keys, if you require any additional information, press [H]");
+    m.GameLoop();
 }
 
 Console.ReadLine();
 
-int GetInt(string text, int minNum, int maxNum)
-{
-    Console.WriteLine(text);
-    int output = 0;
-    bool success = false;
-    while (!success)
-    {
-        string input = Console.ReadLine();
-        success = int.TryParse(input, out output);
-        if (output < minNum)
-        {
-            Console.WriteLine("Too low of a number!");
-            success = false;
-        }
-        else if (output > maxNum)
-        {
-            Console.WriteLine("Too high of a number!");
-            success = false;
-        }
-    }
-    return output;
-}

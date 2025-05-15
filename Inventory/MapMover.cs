@@ -7,7 +7,9 @@ class MapMover
     int playerY;
     int currentFloor = 0;
     bool start = true;
-    public void GameLoop()
+    bool combatStart;
+    string gameState = "Map";
+    public void MainLoop()
     {
         Console.Clear();
         if (start) //Move this to MapMover.cs
@@ -17,8 +19,8 @@ class MapMover
         }
 
         maps[GetCurrentFloor()].PrintMap(GetPlayerY(), GetPlayerX());
-        int input = GetInt("Do you wish to Explore [0], Move [1], Dig [2], Descend [3] or Ascend [4]", 0, 4);
-        if (input == 0)
+        int input = GetInt("Do you wish to Explore [1], Move [2], Dig [3]", 1, 3);
+        if (input == 1)
         {
             int roomInput = 0;
             if (maps[GetCurrentFloor()].PlayerPos(playerX, playerY) == "Path")
@@ -31,7 +33,7 @@ class MapMover
                 roomInput = GetInt("Would you like to Walk up the staircase [1] or Leave it be [2]?", 1, 2);
                 if (input == 1)
                 {
-
+                    Ascend();
                 }
                 else if (input == 2)
                 {
@@ -42,39 +44,70 @@ class MapMover
             {
                 Console.WriteLine("A functional staircase.");
                 roomInput = GetInt("Would you like to Walk down the staircase [1] or Leave it be [2]?", 1, 2);
+                if (input == 1)
+                {
+                    Descend();
+                }
+                else if (input == 2)
+                {
+
+                }
             }
             else if (maps[GetCurrentFloor()].PlayerPos(playerX, playerY) == "Combat")
             {
                 Console.WriteLine("You see a room, some gold and treasure lies at one part of it, but blocking it is what looks to be a monster.");
-
                 roomInput = GetInt("Would you like to Enter the room [1] or Leave it be [2]?", 1, 2);
+                if (input == 1)
+                {
+                    UpdateGameState("Combat");
+                }
+                else if (input == 2)
+                {
+
+                }
             }
             else if (maps[GetCurrentFloor()].PlayerPos(playerX, playerY) == "Treasure")
             {
                 Console.WriteLine("You see a room filled with treasure, you got lucky for once in your miserable life.");
                 roomInput = GetInt("Would you like to Enter the room [1] or Leave it be [2]?", 1, 2);
+                if (input == 1)
+                {
+
+                }
+                else if (input == 2)
+                {
+
+                }
             }
             else if (maps[GetCurrentFloor()].PlayerPos(playerX, playerY) == "Rest")
             {
                 Console.WriteLine("You see a room with a nice fountain, spouting constant water, lying next to it is a nice bed.");
                 roomInput = GetInt("Would you like to Enter the room [1] or Leave it be [2]?", 1, 2);
+                if (input == 1)
+                {
+
+                }
+                else if (input == 2)
+                {
+
+                }
             }
-        }
-        else if (input == 1)
-        {
-            Movement();
         }
         else if (input == 2)
         {
-            maps[GetCurrentFloor()].MakePath(GetDirection(), GetPlayerX(), GetPlayerY());
+            Movement();
         }
         else if (input == 3)
         {
-            Descend();
+            maps[GetCurrentFloor()].MakePath(GetDirection(), GetPlayerX(), GetPlayerY());
         }
-        else if (input == 4)
+    }
+    public void CombatLoop()
+    {
+        if (combatStart)
         {
-            Ascend();
+            //Do some code that createas an enemy, sets hp back to full for the player, etc etc. I suggest moving the combat into another class, considering it will use none of the current code and this
+            //class is called "MapMover". Maybe do a room class with subclasses for each type of room.
         }
     }
     public void StartGame()
@@ -134,6 +167,14 @@ class MapMover
     public int GetCurrentFloor()
     {
         return currentFloor;
+    }
+    public string GetGameState()
+    {
+        return gameState;
+    }
+    public void UpdateGameState(string newGameState)
+    {
+        gameState = newGameState;
     }
     public void Movement()
     {
@@ -202,6 +243,18 @@ class MapMover
         currentFloor++;
         playerX = maps[currentFloor].posX;
         playerY = maps[currentFloor].posY;
+    }
+    void Combat()
+    {
+
+    }
+    void Treasure()
+    {
+
+    }
+    void Rest()
+    {
+
     }
     int GetInt(string text, int minNum, int maxNum)
     {
